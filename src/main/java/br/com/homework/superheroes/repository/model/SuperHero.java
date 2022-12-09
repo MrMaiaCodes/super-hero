@@ -4,6 +4,8 @@ package br.com.homework.superheroes.repository.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Builder
 public class SuperHero {
@@ -14,7 +16,7 @@ public class SuperHero {
 
     private int age;
 
-    private String superPower;
+    private List<SuperPower> superPower;
 
     private double powerLevel;
 }

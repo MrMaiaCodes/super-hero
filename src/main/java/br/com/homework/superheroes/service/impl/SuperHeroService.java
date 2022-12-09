@@ -2,21 +2,23 @@ package br.com.homework.superheroes.service.impl;
 
 import br.com.homework.superheroes.repository.ISuperHeroRepository;
 import br.com.homework.superheroes.repository.model.SuperHero;
-import br.com.homework.superheroes.service.service.ISuperHeroService;
+import br.com.homework.superheroes.repository.model.SuperPower;
+import br.com.homework.superheroes.service.AbstractValidateService;
+import br.com.homework.superheroes.service.ISuperHeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SuperHeroService implements ISuperHeroService {
+public class SuperHeroService extends AbstractValidateService<SuperHero> implements ISuperHeroService {
 
     @Autowired
     private ISuperHeroRepository superHeroRepository;
 
 
     public SuperHero superHeroSaver(String name, String alias, int age,
-                                    String superPower, double powerLevel){
+                                    List<SuperPower> superPower, double powerLevel){
         SuperHero superHero = SuperHero.builder()
                 .name(name)
                 .alias(alias)
@@ -25,8 +27,12 @@ public class SuperHeroService implements ISuperHeroService {
                 .powerLevel(powerLevel)
                 .build();
 
-        superHeroRepository.superHeroSave(superHero);
-        return superHero;
+        if(validate(superHero)){
+            superHeroRepository.superHeroSave(superHero);
+            return superHero;
+        } else
+            return null;
+
     }
 
     public SuperHero findSuperHeroByName(String name){
@@ -45,7 +51,7 @@ public class SuperHeroService implements ISuperHeroService {
     }
 
     public SuperHero changeSuperHeroInfo(String name, String alias, int age,
-                                         String superPower, double powerLevel){
+                                         List<SuperPower> superPower, double powerLevel){
         SuperHero superHeroToChange = superHeroRepository.findSuperHeroByName(name);
 
         superHeroToChange.setName(name);
@@ -56,5 +62,11 @@ public class SuperHeroService implements ISuperHeroService {
 
         superHeroRepository.superHeroSave(superHeroToChange);
         return superHeroToChange;
+    }
+
+    @Override
+    protected boolean validate(SuperHero superHero) {
+        return !validateStringIsNullOrBlank(superHero.getName())
+                && validateIntNotZero(superHero.getAge());
     }
 }
