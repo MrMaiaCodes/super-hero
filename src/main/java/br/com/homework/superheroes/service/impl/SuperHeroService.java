@@ -17,7 +17,7 @@ public class SuperHeroService implements ISuperHeroService {
 
     public SuperHero superHeroSaver(String name, String alias, int age,
                                     String superPower, double powerLevel){
-        SuperHero superHero = SuperHero.builder()
+        var superHero = SuperHero.builder()
                 .name(name)
                 .alias(alias)
                 .age(age)
@@ -30,7 +30,7 @@ public class SuperHeroService implements ISuperHeroService {
     }
 
     public SuperHero findSuperHeroByName(String name){
-        SuperHero superHeroFind = superHeroRepository.findSuperHeroByName(name);
+        var superHeroFind = superHeroRepository.findSuperHeroByName(name);
         if (superHeroFind != null){
             return superHeroFind;
         }
@@ -46,7 +46,7 @@ public class SuperHeroService implements ISuperHeroService {
 
     public SuperHero changeSuperHeroInfo(String name, String alias, int age,
                                          String superPower, double powerLevel){
-        SuperHero superHeroToChange = superHeroRepository.findSuperHeroByName(name);
+        var superHeroToChange = superHeroRepository.findSuperHeroByName(name);
 
         superHeroToChange.setName(name);
         superHeroToChange.setAlias(alias);

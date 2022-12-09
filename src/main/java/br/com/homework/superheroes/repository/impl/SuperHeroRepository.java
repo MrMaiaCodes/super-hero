@@ -12,17 +12,6 @@ public class SuperHeroRepository implements ISuperHeroRepository {
 
     private List<SuperHero> superHeroes = new ArrayList<>();
 
-    private static SuperHeroRepository instance;
-
-    public SuperHeroRepository(){}
-
-    public static SuperHeroRepository getInstance(){
-        if (instance == null){
-            instance = new SuperHeroRepository();
-        }
-        return instance;
-    }
-
     public void superHeroSave(SuperHero superHero){
         superHeroes.add(superHero);
     }
