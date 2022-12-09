@@ -6,6 +6,8 @@ import br.com.homework.superheroes.service.service.ISuperHeroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SuperHeroService implements ISuperHeroService {
 
@@ -36,5 +38,9 @@ public class SuperHeroService implements ISuperHeroService {
             System.out.println("Hero not found!");
         }
         return null;
+    }
+
+    public List<SuperHero> listAllSuperHeroes(){
+        return superHeroRepository.listAllSuperHeroes();
     }
 }

@@ -1,6 +1,7 @@
 package br.com.homework.superheroes.api.api;
 
 
+import br.com.homework.superheroes.api.dto.SuperHeroListResponseDTO;
 import br.com.homework.superheroes.api.dto.SuperHeroResponseDTO;
 import br.com.homework.superheroes.repository.impl.SuperHeroRepository;
 import br.com.homework.superheroes.repository.model.SuperHero;
@@ -29,4 +30,13 @@ public class SuperHeroAPI {
                 .data(superHeroService.findSuperHeroByName(name))
                 .build();
     }
+
+    @GetMapping("/list")
+    public SuperHeroListResponseDTO listAllSuperheroes(){
+        return SuperHeroListResponseDTO.builder()
+                .data(superHeroService.listAllSuperHeroes())
+                .build();
+    }
+
+    
 }

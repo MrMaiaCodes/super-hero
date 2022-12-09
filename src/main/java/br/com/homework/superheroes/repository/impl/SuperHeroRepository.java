@@ -35,6 +35,10 @@ public class SuperHeroRepository implements ISuperHeroRepository {
         }
         return null;
     }
+
+    public List<SuperHero> listAllSuperHeroes() {
+        return superHeroes;
+    }
 }
 
 
