@@ -12,4 +12,7 @@ public interface ISuperHeroService {
     SuperHero findSuperHeroByName(String name);
 
     List<SuperHero> listAllSuperHeroes();
+
+    SuperHero changeSuperHeroInfo(String name, String alias, int age,
+                                  String superPower, double powerLevel);
 }

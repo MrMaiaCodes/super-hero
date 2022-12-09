@@ -43,4 +43,18 @@ public class SuperHeroService implements ISuperHeroService {
     public List<SuperHero> listAllSuperHeroes(){
         return superHeroRepository.listAllSuperHeroes();
     }
+
+    public SuperHero changeSuperHeroInfo(String name, String alias, int age,
+                                         String superPower, double powerLevel){
+        SuperHero superHeroToChange = superHeroRepository.findSuperHeroByName(name);
+
+        superHeroToChange.setName(name);
+        superHeroToChange.setAlias(alias);
+        superHeroToChange.setAge(age);
+        superHeroToChange.setSuperPower(superPower);
+        superHeroToChange.setPowerLevel(powerLevel);
+
+        superHeroRepository.superHeroSave(superHeroToChange);
+        return superHeroToChange;
+    }
 }
