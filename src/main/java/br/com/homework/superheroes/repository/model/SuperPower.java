@@ -6,6 +6,12 @@ import lombok.Data;
 @Data
 @Builder
 public class SuperPower {
-    private String powerName;
+
+    private String holderName;
+
+    private String description;
+
     private String type;
+
+    private int powerLevel;
 }

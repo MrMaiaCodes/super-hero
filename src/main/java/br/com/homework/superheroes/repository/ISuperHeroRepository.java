@@ -4,11 +4,9 @@ import br.com.homework.superheroes.repository.model.SuperHero;
 
 import java.util.List;
 
-public interface ISuperHeroRepository {
+public interface ISuperHeroRepository extends IRepository<SuperHero>{
 
-    void superHeroSave(SuperHero superHero);
 
     SuperHero findSuperHeroByName(String name);
 
-    List<SuperHero> listAllSuperHeroes();
 }

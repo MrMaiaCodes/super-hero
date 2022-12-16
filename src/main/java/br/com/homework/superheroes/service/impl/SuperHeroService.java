@@ -5,6 +5,7 @@ import br.com.homework.superheroes.repository.model.SuperHero;
 import br.com.homework.superheroes.repository.model.SuperPower;
 import br.com.homework.superheroes.service.AbstractValidateService;
 import br.com.homework.superheroes.service.ISuperHeroService;
+import br.com.homework.superheroes.service.ISuperPowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +17,15 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
     @Autowired
     private ISuperHeroRepository superHeroRepository;
 
+    @Autowired
+    private ISuperPowerService superPowerService;
 
-    public SuperHero superHeroSaver(String name, String alias, int age,
-                                    List<SuperPower> superPower, double powerLevel){
-        var superHero = SuperHero.builder()
-                .name(name)
-                .alias(alias)
-                .age(age)
-                .superPower(superPower)
-                .powerLevel(powerLevel)
-                .build();
+
+    @Override
+    public SuperHero save(SuperHero superHero){
 
         if(validate(superHero)){
-            superHeroRepository.superHeroSave(superHero);
+            superHeroRepository.save(superHero);
             return superHero;
         } else
             return null;
@@ -46,22 +43,33 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
         return null;
     }
 
-    public List<SuperHero> listAllSuperHeroes(){
-        return superHeroRepository.listAllSuperHeroes();
+    @Override
+    public List<SuperHero> listAll(){
+        return superHeroRepository.listAll();
     }
 
-    public SuperHero changeSuperHeroInfo(String name, String alias, int age,
-                                         List<SuperPower> superPower, double powerLevel){
+    @Override
+    public SuperHero update(SuperHero superHero) {
+        return null;
+    }
+
+
+    public SuperHero update(String name, String alias, int age,
+                                         List<SuperPower> superPower){
         var superHeroToChange = superHeroRepository.findSuperHeroByName(name);
 
         superHeroToChange.setName(name);
         superHeroToChange.setAlias(alias);
         superHeroToChange.setAge(age);
         superHeroToChange.setSuperPower(superPower);
-        superHeroToChange.setPowerLevel(powerLevel);
 
-        superHeroRepository.superHeroSave(superHeroToChange);
+        superHeroRepository.save(superHeroToChange);
         return superHeroToChange;
+    }
+
+    @Override
+    public void delete (SuperHero superHero){
+
     }
 
     @Override

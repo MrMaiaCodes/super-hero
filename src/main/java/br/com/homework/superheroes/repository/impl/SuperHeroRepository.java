@@ -12,8 +12,15 @@ public class SuperHeroRepository implements ISuperHeroRepository {
 
     private List<SuperHero> superHeroes = new ArrayList<>();
 
-    public void superHeroSave(SuperHero superHero){
+    @Override
+    public SuperHero save(SuperHero superHero){
         superHeroes.add(superHero);
+        return superHero;
+    }
+
+    @Override
+    public void delete(SuperHero superHero) {
+
     }
 
     public SuperHero findSuperHeroByName(String name){
@@ -25,8 +32,14 @@ public class SuperHeroRepository implements ISuperHeroRepository {
         return null;
     }
 
-    public List<SuperHero> listAllSuperHeroes() {
+    @Override
+    public List<SuperHero> listAll() {
         return superHeroes;
+    }
+
+    @Override
+    public SuperHero update(SuperHero superHero) {
+        return null;
     }
 }
 
