@@ -14,7 +14,8 @@ public class SuperVillainRepository implements ISuperVillainRepository {
 
     @Override
     public SuperVillain save(SuperVillain superVillain) {
-        return null;
+        superVillains.add(superVillain);
+        return superVillain;
     }
 
     @Override
@@ -34,6 +35,11 @@ public class SuperVillainRepository implements ISuperVillainRepository {
 
     @Override
     public SuperVillain findSuperVillainByName(String superVillain) {
+        for (SuperVillain superVillainFind : superVillains){
+            if (superVillainFind.getName().equalsIgnoreCase(superVillain)){
+                return superVillainFind;
+            }
+        }
         return null;
     }
 }
