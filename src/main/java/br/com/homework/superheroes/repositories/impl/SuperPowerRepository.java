@@ -24,7 +24,8 @@ public class SuperPowerRepository implements ISuperPowerRepository {
 
     @Override
     public SuperPower save(SuperPower superPower) {
-        return null;
+        superPowers.add(superPower);
+        return superPower;
     }
 
     @Override

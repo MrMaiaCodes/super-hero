@@ -34,7 +34,13 @@ public class SuperPowerService extends AbstractValidateService<SuperPower> imple
 
     @Override
     public SuperPower save(SuperPower superPower) {
-        return superPower;
+
+        if(validate(superPower)) {
+            superPowerRepository.save(superPower);
+            return superPower;
+        } else {
+            return null;
+        }
     }
 
     @Override
