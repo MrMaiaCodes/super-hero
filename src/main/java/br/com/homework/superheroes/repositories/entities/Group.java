@@ -1,15 +1,15 @@
 package br.com.homework.superheroes.repositories.entities;
 
-
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-public class SuperHero extends SuperPerson {
+public class Group {
 
-    private SuperVillain archNemesis;
+    private String name;
 
-    private Guild guild;
+    private String headQuarters;
 
+    private int numberOfMembers;
 }

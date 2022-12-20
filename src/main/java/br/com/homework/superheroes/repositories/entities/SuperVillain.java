@@ -9,4 +9,6 @@ public class SuperVillain extends SuperPerson{
 
     private SuperHero archNemesis;
 
+    private Faction faction;
+
 }

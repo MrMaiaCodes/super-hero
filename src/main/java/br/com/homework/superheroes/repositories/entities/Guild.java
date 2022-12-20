@@ -1,4 +1,13 @@
 package br.com.homework.superheroes.repositories.entities;
 
-public class Guild {
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
+
+@Data
+@SuperBuilder
+public class Guild extends Group{
+
+    private List<SuperHero> memberList;
 }
