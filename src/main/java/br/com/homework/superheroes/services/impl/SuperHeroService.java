@@ -54,17 +54,17 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
     }
 
 
-    public SuperHero update(String name, String alias, int age,
-                                         List<SuperPower> superPower){
-        var superHeroToChange = superHeroRepository.findSuperHeroByName(name);
-
-        superHeroToChange.setName(name);
-        superHeroToChange.setAlias(alias);
-        superHeroToChange.setAge(age);
-        superHeroToChange.setSuperPower(superPower);
-
-        return superHeroToChange;
-    }
+    //public SuperHero update(String name, String alias, int age,
+    //                                         List<SuperPower> superPower){
+    //        var superHeroToChange = superHeroRepository.findSuperHeroByName(name);
+    //
+    //        superHeroToChange.setName(name);
+    //        superHeroToChange.setAlias(alias);
+    //        superHeroToChange.setAge(age);
+    //        superHeroToChange.setSuperPower(superPower);
+    //
+    //        return superHeroToChange;
+    //    }
 
     @Override
     public void delete (SuperHero superHero){
