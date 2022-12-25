@@ -4,6 +4,7 @@ import br.com.homework.superheroes.repositories.ISuperVillainRepository;
 import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.repositories.entities.SuperVillain;
 import br.com.homework.superheroes.services.AbstractValidateService;
+import br.com.homework.superheroes.services.ISuperHeroService;
 import br.com.homework.superheroes.services.ISuperPowerService;
 import br.com.homework.superheroes.services.ISuperVillainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
 
     @Autowired
     private ISuperPowerService superPowerService;
+
+    @Autowired
+    private ISuperHeroService superHeroService;
 
 
     @Override
@@ -63,10 +67,18 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
     }
 
     @Override
-    public SuperHero addArchNemesis(String superHeroName) {
-        //
+    public void addArchNemesis(String villainName, String superHeroName) {
 
-        return null;
+        var villainFind = findSuperVillainByName(villainName);
+        var heroFind = superHeroService.findSuperHeroByName(superHeroName);
+
+        if (villainFind != null && heroFind != null) {
+            if (villainFind.getArchNemesis() != null) {
+                villainFind.setArchNemesis(heroFind);
+                heroFind.setArchNemesis(villainFind);
+            }
+        }
+
     }
 
     @Override

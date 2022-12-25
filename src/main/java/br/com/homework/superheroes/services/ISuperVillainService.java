@@ -7,5 +7,5 @@ public interface ISuperVillainService extends IService<SuperVillain>{
 
     SuperVillain findSuperVillainByName(String superVillainName);
 
-    SuperHero addArchNemesis(String superHeroName);
+    void addArchNemesis(String villainName, String superHeroName);
 }
