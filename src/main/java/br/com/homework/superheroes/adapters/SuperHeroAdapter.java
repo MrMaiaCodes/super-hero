@@ -9,16 +9,20 @@ import java.util.List;
 
 public class SuperHeroAdapter {
 
-    public static SuperHero convertTo(SuperHeroDTO superHeroDTO){
+    public static SuperHero convertTo(SuperHeroDTO superHeroDTO) {
         return SuperHero.builder()
                 .name(superHeroDTO.getName())
                 .alias(superHeroDTO.getAlias())
                 .age(superHeroDTO.getAge())
-                .superPower(SuperPowerAdapter.convertToList(superHeroDTO.getSuperPower()))
+                .superPower(
+                        superHeroDTO.getSuperPower() != null ?
+                                SuperPowerAdapter.convertToList(superHeroDTO.getSuperPower()) :
+                                List.of()
+                )
                 .build();
     }
 
-    public static List<SuperHero> convertToList(List<SuperHeroDTO> superHeroDTO){
-        return superHeroDTO.stream().map(item->convertTo(item)).toList();
+    public static List<SuperHero> convertToList(List<SuperHeroDTO> superHeroDTO) {
+        return superHeroDTO.stream().map(item -> convertTo(item)).toList();
     }
 }

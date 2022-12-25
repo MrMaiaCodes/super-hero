@@ -9,6 +9,7 @@ import br.com.homework.superheroes.services.ISuperPowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,6 +32,30 @@ public class GuildService extends AbstractValidateService<Guild> implements IGui
             System.out.println("Guild not found!");
         }
         return null;
+    }
+
+    @Override
+    public void addSuperHero(String guildName, String heroName) {
+        //public void addSuperPower(String personName, String superPowerName) {
+        //        var superHeroFind = findSuperHeroByName(personName);
+        //        var superPowerFind = superPowerService.findSuperPowerByName(superPowerName);
+        //
+        //        if (superHeroFind != null && superPowerFind != null){
+        //            if (superHeroFind.getSuperPower() != null)
+        //                superHeroFind.setSuperPower(new ArrayList<>());
+        //            superHeroFind.getSuperPower().add(superPowerFind);
+        //        }
+        //    }
+        var guildFind = findGuildByName(guildName);
+        var superHeroFind = superHeroService.findSuperHeroByName(heroName);
+
+        if (guildFind != null && superHeroFind != null) {
+            if (guildFind.getMemberList() != null)
+                guildFind.setMemberList(new ArrayList<>());
+            guildFind.getMemberList().add(superHeroFind);
+
+            guildFind.setNumberOfMembers(guildFind.getNumberOfMembers() + 1);
+        }
     }
 
     @Override
@@ -61,8 +86,7 @@ public class GuildService extends AbstractValidateService<Guild> implements IGui
 
     @Override
     protected boolean validate(Guild guild) {
-        return !validateStringIsNullOrBlank(guild.getName())
-                && validateIntNotZero(guild.getNumberOfMembers());
+        return !validateStringIsNullOrBlank(guild.getName());
 
     }
 }

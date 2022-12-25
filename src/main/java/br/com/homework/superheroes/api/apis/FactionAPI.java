@@ -30,7 +30,7 @@ public class FactionAPI {
     }
 
     @GetMapping("/find/{factionName}")
-    public FactionResponseDTO find(@PathVariable("factionName") String factionName){
+    public FactionResponseDTO find(@PathVariable("faction-name") String factionName){
         return FactionResponseDTO.builder()
                 .data(
                         FactionDTOAdapter.convertTo(

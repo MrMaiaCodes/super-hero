@@ -3,6 +3,7 @@ package br.com.homework.superheroes.repositories.entities;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,5 +16,5 @@ public class SuperPerson {
 
     private int age;
 
-    private List<SuperPower> superPower;
+    private List<SuperPower> superPower = new ArrayList<>();
 }

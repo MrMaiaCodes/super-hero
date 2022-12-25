@@ -9,6 +9,7 @@ import br.com.homework.superheroes.services.ISuperPowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -75,5 +76,17 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
     protected boolean validate(SuperHero superHero) {
         return !validateStringIsNullOrBlank(superHero.getName())
                 && validateIntNotZero(superHero.getAge());
+    }
+
+    @Override
+    public void addSuperPower(String personName, String superPowerName) {
+        var superHeroFind = findSuperHeroByName(personName);
+        var superPowerFind = superPowerService.findSuperPowerByName(superPowerName);
+
+        if (superHeroFind != null && superPowerFind != null){
+            if (superHeroFind.getSuperPower() != null)
+                superHeroFind.setSuperPower(new ArrayList<>());
+            superHeroFind.getSuperPower().add(superPowerFind);
+        }
     }
 }

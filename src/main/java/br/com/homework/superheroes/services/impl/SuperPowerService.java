@@ -29,7 +29,7 @@ public class SuperPowerService extends AbstractValidateService<SuperPower> imple
 
     @Override
     protected boolean validate(SuperPower superPower) {
-        return validateStringIsNullOrBlank(superPower.getDescription());
+        return !validateStringIsNullOrBlank(superPower.getDescription());
     }
 
     @Override

@@ -5,9 +5,13 @@ import br.com.homework.superheroes.adapters.SuperHeroAdapter;
 import br.com.homework.superheroes.adapters.SuperHeroDTOAdapter;
 import br.com.homework.superheroes.api.dtos.SuperHeroListResponseDTO;
 import br.com.homework.superheroes.api.dtos.SuperHeroResponseDTO;
+import br.com.homework.superheroes.api.dtos.requests.HerosNewSuperPowerDTO;
 import br.com.homework.superheroes.api.dtos.requests.SuperHeroDTO;
+import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.services.ISuperHeroService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -65,5 +69,12 @@ public class SuperHeroAPI {
 
     }
 
+    @PostMapping("/add/super-power")
+    public ResponseEntity<SuperHero> addSuperPower(@RequestBody HerosNewSuperPowerDTO newSuperPower){
+        superHeroService.addSuperPower(newSuperPower.getHeroName(), newSuperPower.getSuperPowerName());
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+    }
 
 }

@@ -9,6 +9,7 @@ import br.com.homework.superheroes.services.ISuperVillainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +31,21 @@ public class FactionService extends AbstractValidateService<Faction> implements 
             System.out.println("Faction not found!");
         }
         return null;
+    }
+
+    @Override
+    public void addSuperVillain(String factionName, String villainName) {
+
+        var factionFind = findFactionByName(factionName);
+        var superVillainFind = superVillainService.findSuperVillainByName(villainName);
+
+        if (factionFind != null && superVillainFind != null) {
+            if (factionFind.getMemberList() != null)
+                    factionFind.setMemberList(new ArrayList<>());
+            factionFind.getMemberList().add(superVillainFind);
+
+            factionFind.setNumberOfMembers(factionFind.getNumberOfMembers() + 1);
+        }
     }
 
     @Override
@@ -60,7 +76,6 @@ public class FactionService extends AbstractValidateService<Faction> implements 
 
     @Override
     protected boolean validate(Faction faction) {
-        return !validateStringIsNullOrBlank(faction.getName())
-                && validateIntNotZero(faction.getNumberOfMembers());
+        return !validateStringIsNullOrBlank(faction.getName());
     }
 }
