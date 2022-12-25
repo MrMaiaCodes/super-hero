@@ -36,25 +36,18 @@ public class GuildService extends AbstractValidateService<Guild> implements IGui
 
     @Override
     public void addSuperHero(String guildName, String heroName) {
-        //public void addSuperPower(String personName, String superPowerName) {
-        //        var superHeroFind = findSuperHeroByName(personName);
-        //        var superPowerFind = superPowerService.findSuperPowerByName(superPowerName);
-        //
-        //        if (superHeroFind != null && superPowerFind != null){
-        //            if (superHeroFind.getSuperPower() != null)
-        //                superHeroFind.setSuperPower(new ArrayList<>());
-        //            superHeroFind.getSuperPower().add(superPowerFind);
-        //        }
-        //    }
+
         var guildFind = findGuildByName(guildName);
         var superHeroFind = superHeroService.findSuperHeroByName(heroName);
 
         if (guildFind != null && superHeroFind != null) {
+
             if (guildFind.getMemberList() != null)
                 guildFind.setMemberList(new ArrayList<>());
             guildFind.getMemberList().add(superHeroFind);
 
             guildFind.setNumberOfMembers(guildFind.getNumberOfMembers() + 1);
+            superHeroFind.setGuild(guildFind);
         }
     }
 

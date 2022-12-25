@@ -1,6 +1,7 @@
 package br.com.homework.superheroes.services.impl;
 
 import br.com.homework.superheroes.repositories.ISuperVillainRepository;
+import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.repositories.entities.SuperVillain;
 import br.com.homework.superheroes.services.AbstractValidateService;
 import br.com.homework.superheroes.services.ISuperPowerService;
@@ -58,6 +59,13 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
         else {
             System.out.println("Villain not found!");
         }
+        return null;
+    }
+
+    @Override
+    public SuperHero addArchNemesis(String superHeroName) {
+        //
+
         return null;
     }
 

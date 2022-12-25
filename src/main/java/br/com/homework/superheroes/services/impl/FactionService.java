@@ -1,7 +1,6 @@
 package br.com.homework.superheroes.services.impl;
 
 import br.com.homework.superheroes.repositories.IFactionRepository;
-import br.com.homework.superheroes.repositories.ISuperVillainRepository;
 import br.com.homework.superheroes.repositories.entities.Faction;
 import br.com.homework.superheroes.services.AbstractValidateService;
 import br.com.homework.superheroes.services.IFactionService;
@@ -45,6 +44,7 @@ public class FactionService extends AbstractValidateService<Faction> implements 
             factionFind.getMemberList().add(superVillainFind);
 
             factionFind.setNumberOfMembers(factionFind.getNumberOfMembers() + 1);
+            superVillainFind.setFaction(factionFind);
         }
     }
 

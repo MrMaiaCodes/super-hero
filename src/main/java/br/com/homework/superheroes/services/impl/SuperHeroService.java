@@ -3,9 +3,11 @@ package br.com.homework.superheroes.services.impl;
 import br.com.homework.superheroes.repositories.ISuperHeroRepository;
 import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.repositories.entities.SuperPower;
+import br.com.homework.superheroes.repositories.entities.SuperVillain;
 import br.com.homework.superheroes.services.AbstractValidateService;
 import br.com.homework.superheroes.services.ISuperHeroService;
 import br.com.homework.superheroes.services.ISuperPowerService;
+import br.com.homework.superheroes.services.ISuperVillainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
 
     @Autowired
     private ISuperPowerService superPowerService;
+
+    @Autowired
+    private ISuperVillainService superVillainService;
 
 
     @Override
@@ -42,6 +47,20 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
             System.out.println("Hero not found!");
         }
         return null;
+    }
+
+    @Override
+    public void addARchNemesis(String heroName, String villainName) {
+
+        var heroFind = findSuperHeroByName(heroName);
+        var villainFind = superVillainService.findSuperVillainByName(villainName);
+
+        if (heroFind != null && villainFind != null) {
+            if (heroFind.getArchNemesis() != null)
+                heroFind.setArchNemesis(villainFind);
+
+            villainFind.setArchNemesis(heroFind);
+        }
     }
 
     @Override
