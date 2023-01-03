@@ -10,5 +10,7 @@ public interface ISuperHeroService extends IServiceSuperPerson<SuperHero>{
 
     void addARchNemesis(String heroName, String villainName);
 
+    void addGuild(String heroName, String guildName);
+
 
 }

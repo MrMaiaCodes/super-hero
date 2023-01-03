@@ -2,10 +2,7 @@ package br.com.homework.superheroes.services.impl;
 
 import br.com.homework.superheroes.repositories.ISuperHeroRepository;
 import br.com.homework.superheroes.repositories.entities.SuperHero;
-import br.com.homework.superheroes.services.AbstractValidateService;
-import br.com.homework.superheroes.services.ISuperHeroService;
-import br.com.homework.superheroes.services.ISuperPowerService;
-import br.com.homework.superheroes.services.ISuperVillainService;
+import br.com.homework.superheroes.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,9 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
 
     @Autowired
     private ISuperVillainService superVillainService;
+
+    @Autowired
+    private IGuildService guildService;
 
 
     @Override
@@ -58,6 +58,18 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
                 heroFind.setArchNemesis(villainFind);
 
             villainFind.setArchNemesis(heroFind);
+        }
+    }
+
+    @Override
+    public void addGuild(String heroName, String guildName) {
+
+        var heroFind = findSuperHeroByName(heroName);
+        var guildFind = guildService.findGuildByName(guildName);
+        if (heroFind != null && guildFind != null){
+            heroFind.setGuild(guildFind);
+            guildFind.getMemberList().add(heroFind);
+            guildFind.setNumberOfMembers(guildFind.getNumberOfMembers() + 1);
         }
     }
 

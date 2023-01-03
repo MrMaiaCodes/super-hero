@@ -77,4 +77,12 @@ public class SuperHeroAPI {
 
     }
 
+    @PostMapping("/add/arch-nemesis")
+    public ResponseEntity<SuperHero> addArchNemesis(@RequestBody HerosNewSuperPowerDTO newSuperPower){
+        superHeroService.addSuperPower(newSuperPower.getHeroName(), newSuperPower.getSuperPowerName());
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+
+    }
+
 }

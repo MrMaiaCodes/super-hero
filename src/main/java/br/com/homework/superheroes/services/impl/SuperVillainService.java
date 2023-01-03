@@ -3,10 +3,7 @@ package br.com.homework.superheroes.services.impl;
 import br.com.homework.superheroes.repositories.ISuperVillainRepository;
 import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.repositories.entities.SuperVillain;
-import br.com.homework.superheroes.services.AbstractValidateService;
-import br.com.homework.superheroes.services.ISuperHeroService;
-import br.com.homework.superheroes.services.ISuperPowerService;
-import br.com.homework.superheroes.services.ISuperVillainService;
+import br.com.homework.superheroes.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +20,9 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
 
     @Autowired
     private ISuperHeroService superHeroService;
+
+    @Autowired
+    private IFactionService factionService;
 
 
     @Override
@@ -80,6 +80,20 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
         }
 
     }
+
+    @Override
+    public void addFaction(String villainName, String factionName) {
+
+        var villainFind = findSuperVillainByName(villainName);
+        var factionFind = factionService.findFactionByName(factionName);
+
+        if (villainFind != null && factionFind != null) {
+            villainFind.setFaction(factionFind);
+            factionFind.getMemberList().add(villainFind);
+            factionFind.setNumberOfMembers(factionFind.getNumberOfMembers() + 1);
+        }
+    }
+
 
     @Override
     protected boolean validate(SuperVillain superVillain) {
