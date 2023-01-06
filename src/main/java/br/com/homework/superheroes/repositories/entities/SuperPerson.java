@@ -16,5 +16,15 @@ public class SuperPerson {
 
     private int age;
 
+    private int strength;
+
+    private int agility;
+
+    private int intelligence;
+
+    private int experience;
+
+    private int level;
+
     private List<SuperPower> superPower = new ArrayList<>();
 }

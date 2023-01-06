@@ -2,11 +2,20 @@ package br.com.homework.superheroes.api.apis;
 
 import br.com.homework.superheroes.adapters.GuildAdapter;
 import br.com.homework.superheroes.adapters.GuildDTOAdapter;
+import br.com.homework.superheroes.adapters.SuperHeroAdapter;
+import br.com.homework.superheroes.adapters.SuperHeroDTOAdapter;
 import br.com.homework.superheroes.api.dtos.GuildListResponseDTO;
 import br.com.homework.superheroes.api.dtos.GuildResponseDTO;
 import br.com.homework.superheroes.api.dtos.requests.GuildDTO;
+import br.com.homework.superheroes.api.dtos.requests.GuildsNewSuperHeroDTO;
+import br.com.homework.superheroes.api.dtos.requests.HerosNewGuildDTO;
+import br.com.homework.superheroes.api.dtos.requests.SuperHeroDTO;
+import br.com.homework.superheroes.repositories.entities.Guild;
+import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.services.IGuildService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -61,5 +70,17 @@ public class GuildAPI {
                         )
                 )
                 .build();
+    }
+
+    @PostMapping("/add/super-hero")
+    public ResponseEntity<Guild> addSuperHero(@RequestBody SuperHeroDTO superHeroDTO) {
+        SuperHeroDTOAdapter.convertTo(guildService.addSuperHero(
+                SuperHeroAdapter.convertTo(GuildsNewSuperHeroDTO.getHeroName()),
+                SuperHeroAdapter.convertTo(GuildsNewSuperHeroDTO.getGuildName()
+                )
+        );
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

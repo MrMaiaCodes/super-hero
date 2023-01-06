@@ -11,4 +11,6 @@ public class SuperVillain extends SuperPerson{
 
     private Faction faction;
 
+    private boolean knowsHeroWeakness;
+
 }

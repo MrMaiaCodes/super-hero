@@ -28,7 +28,9 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
     @Override
     public SuperHero save(SuperHero superHero){
 
-        if(validate(superHero)){
+        if(validate(superHero) && (superHero.getStrength()
+                +superHero.getAgility()
+                +superHero.getIntelligence()) <= 30){
             superHeroRepository.save(superHero);
             return superHero;
         } else
@@ -48,7 +50,7 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
     }
 
     @Override
-    public void addARchNemesis(String heroName, String villainName) {
+    public void addArchNemesis(String heroName, String villainName) {
 
         var heroFind = findSuperHeroByName(heroName);
         var villainFind = superVillainService.findSuperVillainByName(villainName);
