@@ -29,7 +29,9 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
     public SuperVillain save(SuperVillain superVillain) {
 
 
-        if (validate(superVillain)){
+        if (validate(superVillain) && (superVillain.getStrength()
+                + superVillain.getAgility()
+                + superVillain.getIntelligence()) <= 30) {
             superVillainRepository.save(superVillain);
             return superVillain;
         } else {
@@ -59,8 +61,7 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
                 .findSuperVillainByName(superVillainName);
         if (superVillainFind != null) {
             return superVillainFind;
-        }
-        else {
+        } else {
             System.out.println("Villain not found!");
         }
         return null;
