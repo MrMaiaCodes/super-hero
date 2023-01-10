@@ -32,6 +32,8 @@ public class FactionRepository implements IFactionRepository {
     @Override
     public void delete(Faction faction) {
 
+        factions.remove(factions);
+
     }
 
     @Override

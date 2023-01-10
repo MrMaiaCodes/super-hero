@@ -9,7 +9,7 @@ public class SuperPowerAdapter {
 
     public static SuperPower convertTo(SuperPowerDTO superPowerDTO){
         return SuperPower.builder()
-                .description(superPowerDTO.getDescription())
+                .name(superPowerDTO.getDescription())
                 .type(superPowerDTO.getType())
                 .powerLevel(superPowerDTO.getPowerLevel())
                 .build();

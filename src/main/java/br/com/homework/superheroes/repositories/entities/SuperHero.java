@@ -12,6 +12,6 @@ public class SuperHero extends SuperPerson {
 
     private Guild guild;
 
-    private int luck;
+    private Long luck;
 
 }

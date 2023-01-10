@@ -26,11 +26,11 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
 
 
     @Override
-    public SuperHero save(SuperHero superHero){
+    public SuperHero save(SuperHero superHero) {
 
-        if(validate(superHero) && (superHero.getStrength()
-                +superHero.getAgility()
-                +superHero.getIntelligence()) <= 30){
+        if (validate(superHero) && ((superHero.getStrength()
+                + superHero.getAgility()
+                + superHero.getIntelligence()) <= 30)) {
             superHeroRepository.save(superHero);
             return superHero;
         } else
@@ -38,12 +38,11 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
 
     }
 
-    public SuperHero findSuperHeroByName(String name){
+    public SuperHero findSuperHeroByName(String name) {
         var superHeroFind = superHeroRepository.findSuperHeroByName(name);
-        if (superHeroFind != null){
+        if (superHeroFind != null) {
             return superHeroFind;
-        }
-        else {
+        } else {
             System.out.println("Hero not found!");
         }
         return null;
@@ -56,9 +55,7 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
         var villainFind = superVillainService.findSuperVillainByName(villainName);
 
         if (heroFind != null && villainFind != null) {
-            if (heroFind.getArchNemesis() != null)
-                heroFind.setArchNemesis(villainFind);
-
+            heroFind.setArchNemesis(villainFind);
             villainFind.setArchNemesis(heroFind);
         }
     }
@@ -68,7 +65,9 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
 
         var heroFind = findSuperHeroByName(heroName);
         var guildFind = guildService.findGuildByName(guildName);
-        if (heroFind != null && guildFind != null){
+        if (heroFind != null && guildFind != null) {
+            if  (guildFind.getMemberList() == null)
+                guildFind.setMemberList(new ArrayList<>());
             heroFind.setGuild(guildFind);
             guildFind.getMemberList().add(heroFind);
             guildFind.setNumberOfMembers(guildFind.getNumberOfMembers() + 1);
@@ -76,25 +75,39 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
     }
 
     @Override
-    public List<SuperHero> listAll(){
+    public List<SuperHero> listAll() {
         return superHeroRepository.listAll();
     }
 
     @Override
     public SuperHero update(SuperHero superHero) {
+
+        var superHeroFind = superHeroRepository.findSuperHeroByName(superHero.getName());
+        superHeroFind.setName(superHero.getName());
+        superHeroFind.setAlias(superHero.getAlias());
+        superHeroFind.setAge(superHero.getAge());
+        superHeroFind.setSuperPowers(superHero.getSuperPowers());
+        superHeroFind.setStrength(superHero.getStrength());
+        superHeroFind.setAgility(superHero.getAgility());
+        superHeroFind.setIntelligence(superHero.getIntelligence());
+        superHeroFind.setExperience(superHero.getExperience());
+        superHeroFind.setLuck(superHero.getLuck());
+        superHeroFind.setLevel(superHero.getLevel());
+        superHeroFind.setGuild(superHero.getGuild());
+
         return null;
     }
 
 
     @Override
-    public void delete (SuperHero superHero){
+    public void delete(SuperHero superHero) {
 
     }
 
     @Override
     protected boolean validate(SuperHero superHero) {
         return !validateStringIsNullOrBlank(superHero.getName())
-                && validateIntNotZero(superHero.getAge());
+                && validateLongNotZero(superHero.getAge());
     }
 
     @Override
@@ -102,10 +115,14 @@ public class SuperHeroService extends AbstractValidateService<SuperHero> impleme
         var superHeroFind = findSuperHeroByName(personName);
         var superPowerFind = superPowerService.findSuperPowerByName(superPowerName);
 
-        if (superHeroFind != null && superPowerFind != null){
-            if (superHeroFind.getSuperPower() != null)
-                superHeroFind.setSuperPower(new ArrayList<>());
-            superHeroFind.getSuperPower().add(superPowerFind);
+        if (superHeroFind != null && superPowerFind != null
+                && superPowerFind.getStrengthRequirement() <= superHeroFind.getStrength()
+                && superPowerFind.getAgilityRequirement() <= superHeroFind.getAgility()
+                && superPowerFind.getIntelligenceRequirement() <= superHeroFind.getIntelligence()
+                && superPowerFind.getLuckRequirement() <= superHeroFind.getLuck()) {
+            if (superHeroFind.getSuperPowers() == null)
+                superHeroFind.setSuperPowers(new ArrayList<>());
+            superHeroFind.getSuperPowers().add(superPowerFind);
         }
     }
 }

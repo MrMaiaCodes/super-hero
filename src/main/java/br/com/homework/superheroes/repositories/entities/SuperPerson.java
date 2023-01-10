@@ -14,17 +14,17 @@ public class SuperPerson {
 
     private String alias;
 
-    private int age;
+    private Long age;
 
-    private int strength;
+    private Long strength;
 
-    private int agility;
+    private Long agility;
 
-    private int intelligence;
+    private Long intelligence;
 
-    private int experience;
+    private Long experience;
 
-    private int level;
+    private Long level;
 
-    private List<SuperPower> superPower = new ArrayList<>();
+    private List<SuperPower> superPowers = new ArrayList<>();
 }

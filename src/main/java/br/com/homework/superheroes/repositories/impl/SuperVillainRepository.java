@@ -21,6 +21,8 @@ public class SuperVillainRepository implements ISuperVillainRepository {
     @Override
     public void delete(SuperVillain superVillain) {
 
+        superVillains.remove(superVillain);
+
     }
 
     @Override

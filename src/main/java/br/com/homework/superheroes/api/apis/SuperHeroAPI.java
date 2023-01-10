@@ -72,11 +72,9 @@ public class SuperHeroAPI {
 
     @PostMapping("/add/super-power")
     public ResponseEntity<SuperHero> addSuperPower(@RequestBody HerosNewSuperPowerDTO newSuperPower) {
-        SuperPowerDTOAdapter.convertTo(superHeroService.addSuperPower(
-                        SuperPowerAdapter.convertTo(newSuperPower.getHeroName()),
-                        SuperPowerAdapter.convertTo(newSuperPower.getSuperPowerName()
-                        )
-                )
+        superHeroService.addSuperPower(
+                newSuperPower.getHeroName(),
+                newSuperPower.getSuperPowerName()
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -93,10 +91,8 @@ public class SuperHeroAPI {
 
     @PostMapping("/add/guild")
     public ResponseEntity<SuperHero> addGuild(@RequestBody HerosNewGuildDTO newGuildDTO) {
-        GuildDTOAdapter.convertTo(superHeroService.addGuild(GuildAdapter.convertTo(newGuildDTO.getHeroName()),
-                        GuildAdapter.convertTo(newGuildDTO.getGuildName())
-                )
-        );
+        superHeroService.addGuild(newGuildDTO.getHeroName(),
+                newGuildDTO.getGuildName());
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

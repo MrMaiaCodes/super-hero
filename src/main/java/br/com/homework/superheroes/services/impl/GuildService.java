@@ -74,7 +74,14 @@ public class GuildService extends AbstractValidateService<Guild> implements IGui
 
     @Override
     public Guild update(Guild guild) {
-        return null;
+
+        var guildFind = guildRepository.findGuildByName(guild.getName());
+        guildFind.setName(guild.getName());
+        guildFind.setHeadQuarters(guild.getHeadQuarters());
+        guildFind.setNumberOfMembers(guild.getNumberOfMembers());
+        guildFind.setMemberList(guild.getMemberList());
+
+        return guild;
     }
 
     @Override

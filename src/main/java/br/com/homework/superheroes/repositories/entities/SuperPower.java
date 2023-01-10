@@ -7,9 +7,17 @@ import lombok.Data;
 @Builder
 public class SuperPower {
 
-    private String description;
+    private String name;
 
     private String type;
 
     private int powerLevel;
+
+    private int strengthRequirement;
+
+    private int agilityRequirement;
+
+    private int intelligenceRequirement;
+
+    private int luckRequirement;
 }

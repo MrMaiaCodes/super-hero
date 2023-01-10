@@ -21,6 +21,8 @@ public class SuperHeroRepository implements ISuperHeroRepository {
     @Override
     public void delete(SuperHero superHero) {
 
+        superHeroes.remove(superHero);
+
     }
 
     public SuperHero findSuperHeroByName(String name){

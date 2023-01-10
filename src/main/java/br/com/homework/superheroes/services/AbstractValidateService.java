@@ -8,7 +8,7 @@ public abstract class AbstractValidateService<T> {
         return value.isBlank();
     }
 
-    protected boolean validateIntNotZero(int value){
+    protected boolean validateLongNotZero(Long value){
         return value != 0;
     }
 }

@@ -1,12 +1,12 @@
 package br.com.homework.superheroes.services.impl;
 
 import br.com.homework.superheroes.repositories.ISuperVillainRepository;
-import br.com.homework.superheroes.repositories.entities.SuperHero;
 import br.com.homework.superheroes.repositories.entities.SuperVillain;
 import br.com.homework.superheroes.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,19 +19,19 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
     private ISuperPowerService superPowerService;
 
     @Autowired
-    private ISuperHeroService superHeroService;
+    private IFactionService factionService;
 
     @Autowired
-    private IFactionService factionService;
+    private ISuperHeroService superHeroService;
 
 
     @Override
     public SuperVillain save(SuperVillain superVillain) {
 
 
-        if (validate(superVillain) && (superVillain.getStrength()
+        if (validate(superVillain) && ((superVillain.getStrength()
                 + superVillain.getAgility()
-                + superVillain.getIntelligence()) <= 30) {
+                + superVillain.getIntelligence()) <= 30)) {
             superVillainRepository.save(superVillain);
             return superVillain;
         } else {
@@ -42,6 +42,7 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
     @Override
     public void delete(SuperVillain superVillain) {
 
+
     }
 
     @Override
@@ -51,7 +52,34 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
 
     @Override
     public SuperVillain update(SuperVillain superVillain) {
-        return null;
+
+        var villainFind = superVillainRepository.findSuperVillainByName(
+                superVillain.getName());
+        villainFind.setName(superVillain.getName());
+        villainFind.setAlias(superVillain.getAlias());
+        villainFind.setAge(superVillain.getAge());
+        villainFind.setFaction(superVillain.getFaction());
+        villainFind.setStrength(superVillain.getStrength());
+        villainFind.setAgility(superVillain.getAgility());
+        villainFind.setIntelligence(superVillain.getIntelligence());
+        villainFind.setLevel(superVillain.getLevel());
+        villainFind.setKnowsHeroWeakness(superVillain.isKnowsHeroWeakness());
+
+    return villainFind;
+    }
+
+    public void addSuperPower(String villainName, String powerName){
+        var superVillainFind = findSuperVillainByName(villainName);
+        var superPowerFind = superPowerService.findSuperPowerByName(powerName);
+
+        if (superVillainFind != null && superPowerFind != null
+                && superPowerFind.getStrengthRequirement() <= superVillainFind.getStrength()
+                && superPowerFind.getAgilityRequirement() <= superVillainFind.getAgility()
+                && superPowerFind.getIntelligenceRequirement() <= superVillainFind.getIntelligence()) {
+            if (superVillainFind.getSuperPowers() == null)
+                superVillainFind.setSuperPowers(new ArrayList<>());
+            superVillainFind.getSuperPowers().add(superPowerFind);
+        }
     }
 
     @Override
@@ -89,6 +117,8 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
         var factionFind = factionService.findFactionByName(factionName);
 
         if (villainFind != null && factionFind != null) {
+            if (factionFind.getMemberList() == null)
+                factionFind.setMemberList(new ArrayList<>());
             villainFind.setFaction(factionFind);
             factionFind.getMemberList().add(villainFind);
             factionFind.setNumberOfMembers(factionFind.getNumberOfMembers() + 1);
@@ -100,7 +130,8 @@ public class SuperVillainService extends AbstractValidateService<SuperVillain> i
     protected boolean validate(SuperVillain superVillain) {
 
         return !validateStringIsNullOrBlank(superVillain.getName())
-                && validateIntNotZero(superVillain.getAge());
+                && validateLongNotZero(superVillain.getAge());
 
     }
+
 }

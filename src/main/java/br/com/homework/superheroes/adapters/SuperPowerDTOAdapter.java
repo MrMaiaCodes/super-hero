@@ -9,7 +9,7 @@ public class SuperPowerDTOAdapter {
 
     public static SuperPowerDTO convertTo(SuperPower superPower){
         var superPowerDTO = new SuperPowerDTO();
-        superPowerDTO.setDescription(superPower.getDescription());
+        superPowerDTO.setDescription(superPower.getName());
         superPowerDTO.setType(superPower.getType());
         superPowerDTO.setPowerLevel(superPower.getPowerLevel());
 

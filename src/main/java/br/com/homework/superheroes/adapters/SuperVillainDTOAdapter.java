@@ -12,7 +12,7 @@ public class SuperVillainDTOAdapter {
         superVillainDTO.setName(superVillain.getName());
         superVillainDTO.setAge(superVillain.getAge());
         superVillainDTO.setAlias(superVillain.getAlias());
-        superVillainDTO.setSuperPower(SuperPowerDTOAdapter.convertToListDTO(superVillain.getSuperPower()));
+        superVillainDTO.setSuperPower(SuperPowerDTOAdapter.convertToListDTO(superVillain.getSuperPowers()));
 
         return superVillainDTO;
 

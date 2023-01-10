@@ -15,7 +15,7 @@ public class SuperPowerRepository implements ISuperPowerRepository {
 
     public SuperPower findSuperPowerByName(String name) {
         for (SuperPower superPowerFind : superPowers) {
-            if (superPowerFind.getDescription().equalsIgnoreCase(name)) {
+            if (superPowerFind.getName().equalsIgnoreCase(name)) {
                 return superPowerFind;
             }
         }
@@ -30,6 +30,8 @@ public class SuperPowerRepository implements ISuperPowerRepository {
 
     @Override
     public void delete(SuperPower superPower) {
+
+        superPowers.remove(superPower);
 
     }
 

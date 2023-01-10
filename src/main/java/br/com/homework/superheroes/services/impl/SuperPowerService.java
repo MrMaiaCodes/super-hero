@@ -29,7 +29,7 @@ public class SuperPowerService extends AbstractValidateService<SuperPower> imple
 
     @Override
     protected boolean validate(SuperPower superPower) {
-        return !validateStringIsNullOrBlank(superPower.getDescription());
+        return !validateStringIsNullOrBlank(superPower.getName());
     }
 
     @Override
@@ -55,7 +55,17 @@ public class SuperPowerService extends AbstractValidateService<SuperPower> imple
 
     @Override
     public SuperPower update(SuperPower superPower) {
-        return null;
+
+        var superPowerFind = superPowerRepository.findSuperPowerByName(superPower.getName());
+        superPowerFind.setName(superPower.getName());
+        superPowerFind.setType(superPower.getType());
+        superPowerFind.setPowerLevel(superPower.getPowerLevel());
+        superPowerFind.setStrengthRequirement(superPower.getStrengthRequirement());
+        superPowerFind.setAgilityRequirement(superPower.getAgilityRequirement());
+        superPowerFind.setIntelligenceRequirement(superPower.getIntelligenceRequirement());
+        superPowerFind.setLuckRequirement(superPower.getLuckRequirement());
+
+        return superPowerFind;
     }
 
 }

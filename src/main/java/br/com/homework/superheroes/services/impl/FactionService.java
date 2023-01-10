@@ -71,7 +71,14 @@ public class FactionService extends AbstractValidateService<Faction> implements 
 
     @Override
     public Faction update(Faction faction) {
-        return null;
+
+        var factionFind = factionRepository.findFactionByName(faction.getName());
+        factionFind.setName(faction.getName());
+        factionFind.setHeadQuarters(faction.getHeadQuarters());
+        factionFind.setNumberOfMembers(faction.getNumberOfMembers());
+        factionFind.setMemberList(faction.getMemberList());
+
+        return factionFind;
     }
 
     @Override

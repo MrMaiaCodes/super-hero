@@ -39,6 +39,8 @@ public class GuildRepository implements IGuildRepository {
     @Override
     public void delete(Guild guild) {
 
+        guilds.remove(guild);
+
     }
 
     @Override
